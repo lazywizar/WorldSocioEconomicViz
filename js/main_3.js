@@ -2,27 +2,28 @@
 *    main.js
 */
 
-var first_call = true; 
-$("#graph-1-area").hide();
 
-$("#graph-1")
-    .on("click", function(){
-        var button = $(this);
-        if (button.text() == "Show Me"){
-            button.text("Hide");
-            $("#graph-1-area").show();
-            $("#chart-area").show();
-            if (first_call) {
-                first_call = false;
-                life_exp_graph();            
-            }
-        }
-        else {
-            button.text("Show Me");
-            $("#graph-1-area").hide();
-            $("#chart-area").hide();
-        }
-})
+// var first_call = true; 
+// $("#graph-1-area").hide();
+
+// $("#graph-1")
+//     .on("click", function(){
+//         var button = $(this);
+//         if (button.text() == "Show Me"){
+//             button.text("Hide");
+//             $("#graph-1-area").show();
+//             $("#chart-area").show();
+//             if (first_call) {
+//                 first_call = false;
+//                 life_exp_graph();            
+//             }
+//         }
+//         else {
+//             button.text("Show Me");
+//             $("#graph-1-area").hide();
+//             $("#chart-area").hide();
+//         }
+// })
 
 var margin = { left:80, right:20, top:50, bottom:100 };
 var height = 500 - margin.top - margin.bottom, 
@@ -37,7 +38,7 @@ var g = d3.select("#chart-area")
             ", " + margin.top + ")");
 var interval;
 
-function life_exp_graph() {
+function population() {
     var time = 0;
     var formattedData;
 
@@ -45,9 +46,8 @@ function life_exp_graph() {
     var tip = d3.tip().attr('class', 'd3-tip')
         .html(function(d) {
             var text = "<strong>Country:</strong> <span style='color:yellow'>" + d.country + "</span><br>";
-            text += "<strong>Life Expectancy:</strong> <span style='color:orange'>" + d3.format(".0f")(d.life_exp) + "</span><br>";
-            text += "<strong>GDP per capita:</strong> <span style='color:orange'>" + d3.format("$,.2f")(d.income) + "</span><br>";
-            text += "<strong>Population:</strong> <span style='color:red'>" + d3.format(",.0f")(d.population) + "</span><br>";
+            text += "<strong>Male Population:</strong> <span style='color:orange'>" + d3.format(".0f")(d.population_male) + "</span><br>";
+            text += "<strong>Female Population:</strong> <span style='color:orange'>" + d3.format(".0f")(d.population_female) + "</span><br>";
             return text;
         });
     g.call(tip);
@@ -235,3 +235,5 @@ function life_exp_graph() {
         $("#date-slider").slider("value", +(time + 1960))
     }
 }
+
+population();
