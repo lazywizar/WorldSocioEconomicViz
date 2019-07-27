@@ -22,9 +22,9 @@ var formattedData;
 var tip = d3.tip().attr('class', 'd3-tip')
     .html(function(d) {
         var text = "<strong>Country:</strong> <span style='color:yellow'>" + d.country + "</span><br>";
-        text += "<strong>Life Expectancy:</strong> <span style='color:orange'>" + d3.format(".2f")(d.life_exp) + "</span><br>";
-        text += "<strong>GDP Per Capita:</strong> <span style='color:orange'>" + d3.format("$,.0f")(d.income) + "</span><br>";
-        // text += "<strong>Population:</strong> <span style='color:red'>" + d3.format(",.0f")(d.population) + "</span><br>";
+        text += "<strong>Life Expectancy:</strong> <span style='color:orange'>" + d3.format(".0f")(d.life_exp) + "</span><br>";
+        text += "<strong>GDP Per Capita:</strong> <span style='color:orange'>" + d3.format("$,.2f")(d.income) + "</span><br>";
+        text += "<strong>Population:</strong> <span style='color:red'>" + d3.format(",.0f")(d.population) + "</span><br>";
         return text;
     });
 g.call(tip);
@@ -33,10 +33,11 @@ g.call(tip);
 var x = d3.scaleLog()
     .base(10)
     .range([0, width])
-    .domain([142, 150000]);
+    .domain([20, 150000]);
 var y = d3.scaleLinear()
     .range([height, 0])
     .domain([0, 90]);
+
 var area = d3.scaleLinear()
     .range([25*Math.PI, 1500*Math.PI])
     .domain([2000, 1400000000]);
@@ -62,11 +63,11 @@ var timeLabel = g.append("text")
     .attr("font-size", "40px")
     .attr("opacity", "0.4")
     .attr("text-anchor", "middle")
-    .text("1800");
+    .text("1969");
 
 // X Axis
 var xAxisCall = d3.axisBottom(x)
-    .tickValues([400, 4000, 40000])
+    .tickValues([100, 1000, 5000, 50000])
     .tickFormat(d3.format("$"));
 g.append("g")
     .attr("class", "x axis")
@@ -80,7 +81,7 @@ g.append("g")
     .attr("class", "y axis")
     .call(yAxisCall);
 
-var continents = ["europe", "asia", "americas", "africa"];
+var continents = ["Europe", "Asia", "North America", "Africa", "Antarctica", "South America", "Oceania"];
 
 var legend = g.append("g")
     .attr("transform", "translate(" + (width - 10) + 
@@ -104,23 +105,22 @@ continents.forEach(function(continent, i){
         .text(continent);
 });
 
-d3.json("data/World_bank_country_Data_normalized.json.json").then(function(data){
-    // console.log(data);
-
+d3.json("data/World_bank_country_Data_normalized.json").then(function(data){
+//d3.json("data/data_small.json").then(function(data){    
     // Clean data
     formattedData = data.map(function(year){
         return year["countries"].filter(function(country){
-            var dataExists = (country.income && country.life_exp);
-            return dataExists
+            return (country.life_exp && country.income);
         }).map(function(country){
             country.income = +country.income;
             country.life_exp = +country.life_exp;
+            country.population = +country.population;            
             return country;            
         })
     });
 
     // First run of the visualization
-    update(formattedData[0]);
+    update(formattedData[58]);
 
 })
 
@@ -149,11 +149,12 @@ $("#continent-select")
     })
 
 $("#date-slider").slider({
-    max: 1960,
-    min: 2018,
+    max: 2017,
+    min: 1960,
     step: 1,
     slide: function(event, ui){
         time = ui.value - 1960;
+        //console.log(formattedData.length)
         update(formattedData[time]);
     }
 })
@@ -165,6 +166,8 @@ function step(){
 }
 
 function update(data) {
+    // console.log(data);
+
     // Standard transition time for the visualization
     var t = d3.transition()
         .duration(100);
@@ -199,7 +202,7 @@ function update(data) {
         .merge(circles)
         .transition(t)
             .attr("cy", function(d){ return y(d.life_exp); })
-            .attr("cx", function(d){ return x(d.income) })
+            .attr("cx", function(d){ return x(d.income); })
             .attr("r", function(d){ return Math.sqrt(area(d.population) / Math.PI) });
 
     // Update the time label
