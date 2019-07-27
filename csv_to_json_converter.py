@@ -7,12 +7,6 @@ Created on Fri Jul 26 20:10:02 2019
 """
 import csv
 
-file = '/Users/lazywiz/code/D3DataVizProject/udemy-d3/Proj/World_bank_country_Data.csv'
-op_file = '/Users/lazywiz/code/D3DataVizProject/udemy-d3/Proj/World_bank_country_Data_normalized.json'
-#file = '/Users/lazywiz/code/D3DataVizProject/udemy-d3/Proj/data.csv'
-#op_file = '/Users/lazywiz/code/D3DataVizProject/udemy-d3/Proj/data_small.json'
-
-
 country_continent_dict = {"AFG":"Asia",
 "ALB":"Europe",
 "ATA":"Antarctica",
@@ -275,6 +269,15 @@ country_continent_dict = {"AFG":"Asia",
 "ZMB":"Africa"
 }
 
+#file = '/Users/lazywiz/code/D3DataVizProject/udemy-d3/Proj/World_bank_country_Data.csv'
+#op_file = '/Users/lazywiz/code/D3DataVizProject/udemy-d3/Proj/World_bank_country_Data_normalized.json'
+#op_time_file = '/Users/lazywiz/code/D3DataVizProject/udemy-d3/Proj/World_bank_country_time_Data_normalized.json'
+
+file = '/Users/lazywiz/code/D3DataVizProject/udemy-d3/Proj/data.csv'
+op_file = '/Users/lazywiz/code/D3DataVizProject/udemy-d3/Proj/data_small.json'
+op_time_file = '/Users/lazywiz/code/D3DataVizProject/udemy-d3/Proj/data_small_time.json'
+
+
 class CountryData:
     def __init__(self, country_code, name):
         self.country_code = country_code
@@ -289,6 +292,7 @@ class CountryData:
         return  "{" + ','.join(('{} = {}'.format(item, self.__dict__[item]) for item in self.__dict__)) + "}"
 
 of = open(op_file, "w")
+oft = open(op_time_file, "w")
 #of.write("year, country, country_code, series", "value")
 
 def name_normalization(name):
@@ -352,7 +356,7 @@ for year in range(1960, 2019):
             country_map.update( {row[1] : c} )
     year_country_map.update({year : country_map})
     
-
+# Write the array based countries in years
 of.write("[ \n")
 
 for year, country_map in year_country_map.items():
@@ -375,7 +379,7 @@ for year, country_map in year_country_map.items():
         
         
         of.write(msg)
-        print(str(year) + ": " + str(count) + ":" +  msg)
+        # print(str(year) + ": " + str(count) + ":" +  msg)
         count = count + 1
         
     of.write("], \n \"year\":\"" + str(year) + "\"")
@@ -385,5 +389,27 @@ for year, country_map in year_country_map.items():
         of.write("},\n")
 
 of.write("\n ]")
-
 of.close()
+
+# Write time series 
+oft.write("\n{ \n\"countries\": [\n")
+
+count = 0
+for year, country_map in year_country_map.items():
+    for country_code, country_data in country_map.items(): 
+        msg = "{ \"country\":\"" + country_data.name + \
+            "\", \"country_code\":\"" + country_code + \
+            "\", \"continent\":\"" + country_continent_dict[country_code] + \
+            "\", \"income\":"  + country_data.gdp + \
+            ", \"year\":"  + str(year) + \
+            ", \"life_exp\":"  + country_data.life_exp + \
+            ", \"population\":"  + country_data.population + \
+            ", \"population_male\":" + country_data.population_male + \
+            ", \"population_female\":" + country_data.population_female + " }\n,"
+         
+        oft.write(msg)
+        print(str(count) + ":" +  msg)
+        count = count + 1
+        
+oft.write("] \n }")
+oft.close()
