@@ -4,9 +4,9 @@
 *    Project 3 - CoinStats
 */
 
-var margin = { left:80, right:100, top:50, bottom:100 },
+var margin = { left:130, right:150, top:50, bottom:100 },
     height = 500 - margin.top - margin.bottom, 
-    width = 800 - margin.left - margin.right;
+    width = 900 - margin.left - margin.right;
 
 var svg = d3.select("#chart-area")
     .append("svg")
@@ -33,11 +33,11 @@ var xLabel = g.append("text")
     .attr("x", width / 2)
     .attr("font-size", "20px")
     .attr("text-anchor", "middle")
-    .text("Time");
+    .text("Year");
 var yLabel = g.append("text")
     .attr("class", "y axisLabel")
     .attr("transform", "rotate(-90)")
-    .attr("y", -60)
+    .attr("y", -90)
     .attr("x", -170)
     .attr("font-size", "20px")
     .attr("text-anchor", "middle")
@@ -62,20 +62,6 @@ var yAxis = g.append("g")
 // Event listeners
 $("#country-select").on("change", update)
 $("#var-select").on("change", update)
-
-// Add jQuery UI slider
-$("#date-slider").slider({
-    range: true,
-    max: 1960,
-    min: 2018,
-    step: 58, // One year
-    values: [1960, 2018],
-    slide: function(event, ui){
-        $("#dateLabel1").text(ui.values[0]);
-        $("#dateLabel2").text(ui.values[1]);
-        update();
-    }
-});
 
 d3.json("data/data_small_time.json").then(function(data){
     // console.log(data);
@@ -106,8 +92,8 @@ d3.json("data/data_small_time.json").then(function(data){
 function update() {
     // Filter data based on selections
     var country = $("#country-select").val(),
-        yValue = $("#var-select").val(),
-        sliderValues = $("#date-slider").slider("values");
+        yValue = $("#var-select").val();
+        //sliderValues = $("#date-slider").slider("values");
 
     var dataTimeFiltered = filteredData[country];  
     
@@ -163,7 +149,7 @@ function update() {
             d1 = dataTimeFiltered[i],
             d = x0 - d0.year > d1.year - x0 ? d1 : d0;
         focus.attr("transform", "translate(" + x(d.year) + "," + y(d.population) + ")");
-        focus.select("text").text(d.population);
+        focus.select("text").text(d.year + " - " + d.population);
         focus.select(".x-hover-line").attr("y2", height - y(d.population));
         focus.select(".y-hover-line").attr("x2", -x(d.year));
     }
