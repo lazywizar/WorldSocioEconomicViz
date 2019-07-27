@@ -85,7 +85,7 @@ var continents = ["Europe", "Asia", "North America", "Africa", "Antarctica", "So
 
 var legend = g.append("g")
     .attr("transform", "translate(" + (width - 10) + 
-        "," + (height - 125) + ")");
+        "," + (height - 200) + ")");
 
 continents.forEach(function(continent, i){
     var legendRow = legend.append("g")
@@ -120,7 +120,7 @@ d3.json("data/World_bank_country_Data_normalized.json").then(function(data){
     });
 
     // First run of the visualization
-    update(formattedData[58]);
+    update(formattedData[0]);
 
 })
 
