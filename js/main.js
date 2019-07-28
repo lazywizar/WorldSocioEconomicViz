@@ -101,15 +101,19 @@ $("#page-1-btn")
         $("#graph-1-area").show();
         $("#chart-area").show();
 
+        $("#story-left").empty();
+        $("#story-left").append(
+            `
+            Here is the first visualization where we see <strong><font color="blue">Life Expectancy at birth</font>, 
+                <font color="green"> GDP per capita </font> and <font color="red">Population </font> </strong> of a country change over year in a single visualization. 
+                X-axis and Y-axis are self explanatory, size of the bubble is proportional to the population of the country.
+            `
+        );
+
         // Reset message
         $("#story-down").empty();
         $("#story-down").append(
-                `Here is the first visualization where we see <strong><font color="blue">Life Expectancy at birth</font>, 
-                <font color="green"> GDP per capita </font> and <font color="red">Population </font> </strong> of a country change over year in a single visualization. 
-                X-axis and Y-axis are self explanatory, size of the bubble is proportional to the population of the country.
-
-                <br><br>
-                Slide the <strong>Year Slider</strong> to observe the transition over time. Hover mouse over the bubbles to see the details,  
+                `Slide the <strong>Year Slider</strong> to observe the transition over time. Hover mouse over the bubbles to see the details,  
                 <br><br>
                 Play with the <strong>continent</strong> and <strong>country</strong> filter, and focus on a single continent or country you are interested in. Be careful, do not choose a country and a wrong continent! Time to test your geography!!
                 `
@@ -160,6 +164,14 @@ $("#page-2-btn")
         // Reset message
         $("#story-down").empty();
         $("#story-down").append(
+            `
+            Some story here!!
+            `
+        );
+
+        
+        $("#story-left").empty();
+        $("#story-left").append(
                 `
                 Lets pause the slider at <strong><font color="orange">2008</font></strong>, 
                 and select just <strong><font color="orange">Europe</font></strong> as a continent. 
@@ -201,6 +213,13 @@ $("#page-3-btn")
 
         $("#story-down").empty();
         $("#story-down").append(
+            `
+            Some story here!!
+            `
+        );
+
+        $("#story-left").empty();
+        $("#story-left").append(
                 `
                 This visualization shows the population growth and gender ratio change with it. <br>
                 Taking UAE as an default example, it is alarming to see the steep rise in the gender ratio over the last 50 years.
@@ -234,6 +253,12 @@ $("#page-4-btn")
 
         $("#story-down").empty();
         $("#story-down").append(
+            `
+            Some story here!!
+            `
+        );
+        $("#story-left").empty();
+        $("#story-left").append(
                 `
                     The above graph clearly points the start of <font color="red"><strong>Syrian civil war</strong></font> around 2011. More than 4 million citizens migrated out since then. We should wait to see the graph be back on upward trajectory.  
                 `
