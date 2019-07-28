@@ -29,9 +29,8 @@ g.append("path")
 // Circle Tip
 var tip = d3.tip().attr('class', 'd3-tip')
     .html(function(d) {
-        var text = "<strong>Population:</strong> <span style='color:orange'>" + d3.format(".0f")(d.population) + "</span><br>";
-        text += "<strong>Male Population:</strong> <span style='color:orange'>" + d3.format(".0f")(d.population_male) + "</span><br>";
-        text += "<strong>Female Population:</strong> <span style='color:orange'>" + d3.format(".0f")(d.population_female) + "</span><br>";
+        var text = "<strong><span style='color:blue; align:center'>" + d3.format(".0f")(d.year) + " - " + d3.format(".2s")(d.population) +  "</span><strong><br>";
+        text += "<strong>Gender Ratio:</strong> <span style='color:orange'>" + d3.format(".2f")((d.population_male / d.population_female) * 100) + "</span><br>";
         return text;
     });
 g.call(tip);
@@ -56,8 +55,14 @@ var yLabel = g.append("text")
 // Scales
 var x = d3.scaleLinear().range([0, width]);
 var y = d3.scaleLinear().range([height, 0]);
-var color_scale = d3.scaleLinear().range(["red", "blue"]).domain([0,1]);
-var radius_scale = d3.scaleLinear().range([2.0, 10.0]).domain([0.2,1]);
+var color_scale = d3.scaleLinear().range(["blue", "red"]).domain([50, 250]);
+var radius_scale = d3.scaleLinear().domain([70, 300]).range([2.5, 15]);
+
+var grs = [50, 100, 200];
+
+// Color legend.
+
+
 
 // X-axis
 var xAxisCall = d3.axisBottom()
@@ -74,21 +79,6 @@ var yAxis = g.append("g")
 // Event listeners
 $("#country-select").on("change", update)
 $("#var-select").on("change", update)
-
-function get_radius(population_male, population) {
-    console.log(population_male / population);
-    return radius_scale(population_male / population);
-}
-
-function gender_ratio_color(population_male, population) {
-    if(population_male == 0 || population == 0) {
-        return "yellow";
-    } 
-    else {
-        console.log(population_male / population);
-        return color_scale(population_male / population);
-    }
-}
 
 d3.json("data/World_bank_country_time_Data_normalized.json").then(function(data){
     // console.log(data);
@@ -109,8 +99,8 @@ d3.json("data/World_bank_country_time_Data_normalized.json").then(function(data)
             d["year"] = +d["year"];
         });
     }
-    console.log("FD");
-    console.log(filteredData);
+    //console.log("FD");
+    //console.log(filteredData);
 
     // Run the visualization for the first time
     update();
@@ -120,7 +110,6 @@ function update() {
     // Filter data based on selections
     var country = $("#country-select").val(),
         yValue = $("#var-select").val();
-        //sliderValues = $("#date-slider").slider("values");
 
     var dataTimeFiltered = filteredData[country];  
     
@@ -142,6 +131,7 @@ function update() {
     d3.select(".focus").remove();
     d3.select(".overlay").remove();
 
+    /*
     // Tooltip code
     var focus = g.append("g")
         .attr("class", "focus")
@@ -158,7 +148,8 @@ function update() {
         .attr("r", 5);
     focus.append("text")
         .attr("x", 15)
-        .attr("dy", ".31em");
+        .attr("y", 20);
+        //.attr("dy", ".31em");
     svg.append("rect")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
         .attr("class", "overlay")
@@ -175,12 +166,16 @@ function update() {
             d0 = dataTimeFiltered[i - 1],
             d1 = dataTimeFiltered[i],
             d = x0 - d0.year > d1.year - x0 ? d1 : d0;
+        
+        var text = d.year + " - Population: " + d3.format(".2s")(d.population) + ", GR: " + d3.format(".2f")((d.population_male / d.population_female) * 100);
+
         focus.attr("transform", "translate(" + x(d.year) + "," + y(d.population) + ")");
-        focus.select("text").text(d.year + " - " + d.population);
+        var focusText = focus.select("text").text(text);
+
         focus.select(".x-hover-line").attr("y2", height - y(d.population));
         focus.select(".y-hover-line").attr("x2", -x(d.year));
     }
-
+    */
     // Path generator
     line = d3.line()
         .x(function(d){ return x(d.year); })
@@ -204,7 +199,7 @@ function update() {
     circles.enter()
         .append("circle")
         .attr("class", "enter")
-        .attr("fill", function(d) { return gender_ratio_color(d.population_male, d.population); })
+        .attr("fill", function(d) { return color_scale((d.population_male / d.population_female) * 100); })
         .style("stroke", "black")
         .on("mouseover", tip.show)
         .on("mouseout", tip.hide)
@@ -212,7 +207,9 @@ function update() {
         .transition(t)
             .attr("cy", function(d){ return y(d.population); })
             .attr("cx", function(d){ return x(d.year); })
-            .attr("r", function(d){ return 2 + get_radius(d.population_male, d.population); })        
+            .attr("r", function(d){ return 2 + radius_scale((d.population_male / d.population_female) * 100); })        
+            .attr("fill", function(d) { return color_scale((d.population_male / d.population_female) * 100); })
+
 
     // Update y-axis label
     var newText = (yValue == "population") ? "Population" :

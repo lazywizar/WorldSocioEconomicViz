@@ -227,9 +227,9 @@
                             <option value="Tuvalu">Tuvalu</option>
                             <option value="Uganda">Uganda</option>
                             <option value="Ukraine">Ukraine</option>
-                            <option value="United Arab Emirates">United Arab Emirates</option>
+                            <option selected value="United Arab Emirates">United Arab Emirates</option>
                             <option value="United Kingdom">United Kingdom</option>
-                            <option selected value="United States">United States</option>
+                            <option value="United States">United States</option>
                             <option value="Uruguay">Uruguay</option>
                             <option value="Uzbekistan">Uzbekistan</option>
                             <option value="Vanuatu">Vanuatu</option>
@@ -242,15 +242,46 @@
                             <option value="Zimbabwe">Zimbabwe</option>
                     </select>
                 </div>
-                <div class="col-md-4">
-                    <select id="var-select" class="form-control">
-                        <option selected value="population">Population</option>
-                    </select>
-                </div>
             </div>
             <div class="row">
-                <div id="chart-area"></div>  
-            </div>
+                <div class="col-md-10">
+                    <div id="chart-area"></div>
+                </div>
+                <div class="col-md-2">
+                        <svg width="130" height="250" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="Gradient1">
+                                <stop class="stop1" offset="0%"/>
+                                <stop class="stop3" offset="100%"/>
+                                </linearGradient>
+                                <linearGradient id="Gradient2" x1="0" x2="0" y1="0" y2="1">
+                                <stop offset="0%" stop-color="red"/>
+                                <stop offset="100%" stop-color="blue"/>
+                                </linearGradient>
+                                <style type="text/css"><![CDATA[
+                                #rect1 { fill: url(#Gradient1); }
+                                .stop1 { stop-color: red; }
+                                .stop2 { stop-color: black; stop-opacity: 0; }
+                                .stop3 { stop-color: blue; }
+                                ]]></style>
+                            </defs>
+                        
+                            <rect x="10" y="30" rx="10" ry="10" width="50" height="200" fill="url(#Gradient2)"/>
+                            <text x="10" y="20" fill="black" font-family="sans-serif" font-size="12pt">Gender Ratio</text>
+                            
+                            <text x="13" y="50" fill="white" font-family="sans-serif" font-size="12pt">> 250</text>
+                            <text x="13" y="170" fill="white" font-family="sans-serif" font-size="12pt">100</text>
+                            <text x="13" y="220" fill="white" font-family="sans-serif" font-size="12pt">< 50</text>
+                        </svg>
+                </div>
+            </div> 
+            <div class="col-md-10">
+                    <div id="story-area">
+                        <p>
+                            The above visualization shows the population growth and gender ratio change with it. <br>
+                            Taking UAE as an default example, it is alarming to see the steep rise in the gender ratio over the last 50 years.    
+                    </div>
+            </div>   
         </div>
 
     <!-- External JS libraries -->
@@ -259,6 +290,8 @@
     <script src="js/jquery-ui.min.js"></script>
     <script src="js/d3.min.js"></script>
     <script src="js/d3-tip.js"></script>
+    <script src="js/d3-legend.js"></script>
+    
     <!-- Custom JS -->
     <!-- <script src="js/population_main.js"></script> -->
     <script src="js/population_scatter.js"></script>
