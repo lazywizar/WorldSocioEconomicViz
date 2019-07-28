@@ -51,8 +51,8 @@
     <div class="container" id="graph-1-area">
         <div class="row">
             <div class="col-md-6">
-                <button id="play-button" class="btn btn-primary">Play</button>
-                <button id="reset-button" class="btn btn-primary">Reset</button>
+                <!--<button id="play-button" class="btn btn-primary">Play</button>
+                <button id="reset-button" class="btn btn-primary">Reset</button> -->
                 <div id="slider-div">
                     <span style='color:orange'> <label>Year: <span id="year">1800</span></label> </span>
                     <div id="date-slider"></div>
@@ -60,7 +60,7 @@
             </div>
             <div class="col-md-2">
                 <div>
-                    <label>Select Continent</label>
+                    <label class="selector-label">Select Continent</label>
                     <select id="continent-select" class="form-control">
                         <option selected value="all">All</option>
                         <option value="Europe">Europe</option>
@@ -74,7 +74,7 @@
             </div>
             <div class="col-md-4">
                 <div>
-                    <label>Select Country</label>
+                    <label class="selector-label">Select Country</label>
                     <select id="country-select" class="form-control">
                             <option selected value="All">All</option>
                             <option value="Afghanistan">Afghanistan</option>
@@ -314,8 +314,14 @@
         <div class="row">
             <div class="col-md-12">
                     <div id="story-box">
-                        <p style="font-family:courier;" align="center">
-                            Play with the continent and country filter, and focus on a single continent or country you are interested in. Be careful, do not choose a country and a wrong continent! Time to test your geography!!
+                        <p style="font-family:courier; align="center">
+                            <font color="grey">
+                                NOTE: Not all the countries have data for all the years, 
+                                and the bubbles would not appear if the data is missing. 
+                                Data is collected from <a href="https://databank.worldbank.org/source/world-development-indicators">
+                                    World Bank DataBank</a>. The visualization idea is inspired by <a href="https://www.gapminder.org">
+                                        GapMinder</a>. 
+                            </font>
                         </p>
                     </div>                 
             </div>

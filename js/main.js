@@ -25,8 +25,10 @@ $("#page-1-btn")
                 X-axis and Y-axis are self explanatory, size of the bubble is proportional to the population of the country.
 
                 <br><br>
-                Hover mouse over the bubbles to see the details, slide the time slider to observe the transition over time. 
-                Press <strong><font color="orange">Play</font> </strong> and see the vizualization in action. You can pause and reset at any year and observe the data.`
+                Slide the <strong>Year Slider</strong> to observe the transition over time. Hover mouse over the bubbles to see the details,  
+                <br><br>
+                Play with the <strong>continent</strong> and <strong>country</strong> filter, and focus on a single continent or country you are interested in. Be careful, do not choose a country and a wrong continent! Time to test your geography!!
+                `
         );
 
         $(this).prop('disabled', true);
@@ -196,7 +198,7 @@ function life_exp_graph() {
         `);
         
         $("#page-1-btn").prop('disabled', false);
-        $("#play-button").click();
+        //$("#play-button").click();
 
         time = 48;
         $("#continent-select").val( "Europe" );
