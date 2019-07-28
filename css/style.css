@@ -174,3 +174,5 @@ input, select{
 	opacity: 0.2;
 	filter: alpha(opacity=50); /* For IE8 and earlier */
 }
+
+/* Annotation */

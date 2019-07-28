@@ -645,13 +645,12 @@ function population_graph() {
 
     function update() {
         // Filter data based on selections
-        var country = $("#country-select").val(),
-            yValue = $("#var-select").val();
+        var country = $("#country-select").val();
 
         var dataTimeFiltered = filteredData[country];  
         
         console.log("Country: " + country);
-        console.log(dataTimeFiltered);
+        //console.log(dataTimeFiltered);
 
         // Update scales
         x.domain(d3.extent(dataTimeFiltered, function(d){ return d3.format(".0f")(d.year); }));
@@ -668,51 +667,6 @@ function population_graph() {
         d3.select(".focus").remove();
         d3.select(".overlay").remove();
 
-        /*
-            // Tooltip code
-            var focus = g.append("g")
-                .attr("class", "focus")
-                .style("display", "none");
-            focus.append("line")
-                .attr("class", "x-hover-line hover-line")
-                .attr("y1", 0)
-                .attr("y2", height);
-            focus.append("line")
-                .attr("class", "y-hover-line hover-line")
-                .attr("x1", 0)
-                .attr("x2", width);
-            focus.append("circle")
-                .attr("r", 5);
-            focus.append("text")
-                .attr("x", 15)
-                .attr("y", 20);
-                //.attr("dy", ".31em");
-            svg.append("rect")
-                .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-                .attr("class", "overlay")
-                .attr("width", width)
-                .attr("height", height)
-                .on("mouseover", function() { focus.style("display", null); })
-                .on("mouseout", function() { focus.style("display", "none"); })
-                .on("mousemove", mousemove);
-            
-
-            function mousemove() {
-                var x0 = x.invert(d3.mouse(this)[0]),
-                    i = bisectDate(dataTimeFiltered, x0, 1),
-                    d0 = dataTimeFiltered[i - 1],
-                    d1 = dataTimeFiltered[i],
-                    d = x0 - d0.year > d1.year - x0 ? d1 : d0;
-                
-                var text = d.year + " - Population: " + d3.format(".2s")(d.population) + ", GR: " + d3.format(".2f")((d.population_male / d.population_female) * 100);
-
-                focus.attr("transform", "translate(" + x(d.year) + "," + y(d.population) + ")");
-                var focusText = focus.select("text").text(text);
-
-                focus.select(".x-hover-line").attr("y2", height - y(d.population));
-                focus.select(".y-hover-line").attr("x2", -x(d.year));
-            }
-        */
         // Path generator
         line = d3.line()
             .x(function(d){ return x(d.year); })
@@ -748,8 +702,88 @@ function population_graph() {
                 .attr("fill", function(d) { return color_scale((d.population_male / d.population_female) * 100); })
                 //.attr("fill-opacity", function(d) { return color_opacity((d.population_male / d.population_female) * 100); })
         // Update y-axis label
-        var newText = (yValue == "population") ? "Population" :
-            ((yValue == "population_male") ?  "Population Male" : "Population Female")
+        var newText = "Population";
         yLabel.text(newText);
+        
+        make_annotation_page(country);
+    }
+
+    /* Annotations */
+    function make_annotation_page(country) {
+        console.log("Country" + country);
+        
+        const annotations_uae = [
+            {
+                note: {
+                    label: "Notice the Gender ratio was better around these year.",
+                    title: "Year 1960 - 1965"
+                },
+                type: d3.annotationCalloutCircle,
+                subject: {
+                    radius: 42,         // circle radius
+                    radiusPadding: 20   // white space around circle befor connector
+                },
+                color: ["orange"],
+                x: 150,
+                y: height + margin.top,
+                dy: -100,
+                dx: 70
+            },
+            {
+                note: {
+                    label: "Ratio of male to female got worst from worse in recent years. Also notice the decline in population growth.",
+                    title: "Year 2010 - 2011"
+                },
+                type: d3.annotationCalloutCircle,
+                subject: {
+                    radius: 45,         // circle radius
+                    radiusPadding: 20   // white space around circle befor connector
+                },
+                color: ["blue"],
+                x: 150 + 520,
+                y: height - 340 + margin.top,
+                dy: 70,
+                dx: -150
+            }
+        ]
+
+        const annotations_seria = [
+            {
+                note: {
+                    label: "Population decline starts. Marks the start of Syrian civil war",
+                    title: "Year 2010"
+                },
+                /*type: d3.annotationCalloutCircle,
+                subject: {
+                    radius: 45,         // circle radius
+                    radiusPadding: 20   // white space around circle befor connector
+                },*/
+                color: ["orange"],
+                x: 150 + 500,
+                y: height - 350 + margin.top,
+                dy: 50,
+                dx: -160
+            }
+        ]
+        
+        var annotations;
+        if(country == "United Arab Emirates") {
+            annotations = annotations_uae;
+        } else if(country == "Syrian Arab Republic") {
+            annotations = annotations_seria;
+        } else {
+            d3.select("svg").select("#annotations").remove();
+        }
+
+        // Add annotation to the chart
+        const makeAnnotations = d3.annotation()
+            .annotations(annotations)
+
+        if(annotations != null) {
+            d3.select("svg")
+                .append("g")
+                    .attr("id", "annotations") 
+                .call(makeAnnotations)
+        }
     }
 }
