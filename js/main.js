@@ -279,7 +279,19 @@ $("#page-4-btn")
         $("#story-foot").empty();
         $("#story-foot").append(
             `
-            <font color="grey"> **Gender ratio is calculated as <font color="green">(Population_Male / Population_Female) * 100</font></font>
+            <font color="darkgrey">
+                <strong>References and Credits:</strong><br>
+                <strong>&Tab;Knowledge:</strong> https://www.coursera.org/learn/cs-498-dv/ 
+                <br>
+                <strong>&Tab;Data:</strong> https://databank.worldbank.org/source/world-development-indicators [Transformed using python scripts to JSON format] 
+                <br>
+                <strong>&Tab;D3 Annotations:</strong> https://d3-annotation.susielu.com/
+                <br>
+                <strong>&Tab;D3 Deep learning:</strong> https://www.udemy.com/masteringd3js/ 
+                <br>
+                <strong>&Tab;D3 Tip:</strong> https://github.com/caged/d3-tip 
+                <br>
+            </font>
             `
         );
 
