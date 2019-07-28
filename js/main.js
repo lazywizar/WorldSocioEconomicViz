@@ -169,7 +169,7 @@ $("#page-2-btn")
             `
         );
 
-        
+
         $("#story-left").empty();
         $("#story-left").append(
                 `
@@ -221,8 +221,12 @@ $("#page-3-btn")
         $("#story-left").empty();
         $("#story-left").append(
                 `
-                This visualization shows the population growth and gender ratio change with it. <br>
-                Taking UAE as an default example, it is alarming to see the steep rise in the gender ratio over the last 50 years.
+                This visualization shows the population growth and <strong><font color="green">gender ratio</font></strong> change with it. <br>
+                Taking <strong><font color="red">UAE</font></strong> as an default example, it is alarming to see the steep rise in the gender ratio over the last 50 years.
+
+                <br><br>
+                Explore how the <i>warm</i> looks for different countries!
+
                 `
         );
 
@@ -260,7 +264,12 @@ $("#page-4-btn")
         $("#story-left").empty();
         $("#story-left").append(
                 `
-                    The above graph clearly points the start of <font color="red"><strong>Syrian civil war</strong></font> around 2011. More than 4 million citizens migrated out since then. We should wait to see the graph be back on upward trajectory.  
+                    The above graph clearly points the start of 
+                    <font color="red"><strong>Syrian civil war</strong></font> around 2011. 
+                    More than 4 million citizens migrated out since then. 
+                    
+                    <br><br>
+                    Hope there be peace, and the graph be back on upward trajectory soon.  
                 `
         );
 
