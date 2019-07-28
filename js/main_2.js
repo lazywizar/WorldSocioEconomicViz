@@ -143,8 +143,7 @@ function life_exp_graph() {
         });
 
         // First run of the visualization
-        update(formattedData[0]);
-
+        update(formattedData[48]);
     })
 
     $("#play-button")
@@ -171,6 +170,11 @@ function life_exp_graph() {
             update(formattedData[time]);
         })
 
+    $("#country-select")
+        .on("change", function(){
+            update(formattedData[time]);
+        })
+
     $("#date-slider").slider({
         max: 2017,
         min: 1960,
@@ -189,20 +193,31 @@ function life_exp_graph() {
     }
 
     function update(data) {
-        // console.log(data);
+        //console.log(data);
 
         // Standard transition time for the visualization
         var t = d3.transition()
             .duration(50);
 
-        var continent = $("#continent-select").val();
+        var country = $("#country-select").val();
+        console.log(country);
 
-        var data = data.filter(function(d){
-            if (continent == "all") { return true; }
-            else {
-                return d.continent == continent;
+        var continent = $("#continent-select").val();
+        console.log(continent);
+        
+        data = data.filter(function(d){
+            if (country == "All") { 
+                return true; 
+            } else {
+                return d.country == country;
             }
-        })
+        }).filter(function(d){
+                if (continent == "all") { 
+                    return true; 
+                } else {
+                    return d.continent == continent;
+                }
+        }) 
 
         // JOIN new data with old elements.
         var circles = g.selectAll("circle").data(data, function(d){
@@ -235,3 +250,4 @@ function life_exp_graph() {
         $("#date-slider").slider("value", +(time + 1960))
     }
 }
+
