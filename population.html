@@ -1,22 +1,68 @@
 <!doctype html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="description" content="">
-        <title>CoinStats</title>
-        <!-- Bootstrap Core CSS -->
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-        <!-- jQuery UI CSS -->
-        <link rel="stylesheet" href="css/jquery-ui.min.css">
-        <link rel="stylesheet" href="css/jquery-ui.structure.min.css">
-        <link rel="stylesheet" href="css/jquery-ui.theme.min.css">
-        <!-- Custom CSS -->
-        <link rel="stylesheet" href="css/style.css">
-    </head>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <title>GapMinder Project</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- jQuery UI CSS -->
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.structure.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.theme.min.css">
+    <!-- D3 Tooltip CSS -->
+    <link rel="stylesheet" href="css/d3-tip.css">
+    <!-- Custom styling -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- External JS libraries -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/d3.min.js"></script>
+    <script src="js/d3-tip.js"></script>
+</head>
 
-    <body>
-        <nav class="navbar navbar-default">
-        </nav>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <h1 class="center" style="font-family:courier;" align="center">World Population, Gender Ratio & Economic Growth</h1>
+            <!-- <a class="navbar-brand" href="#"><img id="logo" src="img/logo.png"></a>  -->    
+        </div>
+        <div class="container">
+                <div class="row">
+                    <div class="col-md-2">
+                            <button id="page-1-btn" class="btn btn-lg btn-info">Observe</button>
+                    </div>
+                    <div class="col-md-1">
+                            <img src="img/right_arrow.jpg" alt="right" height="42" width="42">
+                    </div>
+
+                    <div class="col-md-2">
+                            <button id="page-2-btn" class="btn btn-lg btn-info center-block">Think</button>
+                    </div>
+                    <div class="col-md-1">
+                            <img src="img/right_arrow.jpg" alt="right" height="42" width="42">
+                    </div>
+
+                    <div class="col-md-2">
+                            <button id="page-3-btn" class="btn btn-lg btn-info center-block">Dive Deeper</button>
+                    </div>
+                    <div class="col-md-1">
+                            <img src="img/right_arrow.jpg" alt="right" height="42" width="42">
+                    </div>
+
+                    <div class="col-md-2">
+                            <button id="page-4-btn" class="btn btn-lg btn-info center-block">Explore</button>
+                    </div>
+                    <div class="col-md-1">
+
+                    </div>
+
+                </div>
+        </div> 
+    </nav>
+
 
         <!-- Bootstrap grid setup -->
         <div class="container">
@@ -295,7 +341,6 @@
     
     <!-- Custom JS -->
     <!-- <script src="js/population_main.js"></script> -->
-    <script src="js/population_scatter.js"></script>
-
+    <script src="js/main.js"></script>
     </body>
 </html>

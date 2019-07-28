@@ -43,6 +43,10 @@
 	font: 10px sans-serif;
 }
 
+#selector-label {
+	color: blue;
+}
+
 .axis path,
 .axis line {
 	fill: none;

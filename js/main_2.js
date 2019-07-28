@@ -129,7 +129,6 @@ function life_exp_graph() {
     });
 
     d3.json("data/World_bank_country_Data_normalized.json").then(function(data){
-    //d3.json("data/data_small.json").then(function(data){    
         // Clean data
         formattedData = data.map(function(year){
             return year["countries"].filter(function(country){
