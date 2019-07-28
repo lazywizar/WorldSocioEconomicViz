@@ -450,33 +450,6 @@ function life_exp_graph(init_time) {
         }
     })
 
-    // $("#page-2-btn")
-    //     .on("click", function(){
-    //         if(formattedData == null) {
-    //             life_exp_graph();
-    //         }
-
-    //         //$("#page-1-btn").click();
-            
-    //         $("#story-down").empty();
-    //         $("#story-down").append(`
-    //             Lets pause the slider at <strong><font color="orange">2008</font></strong>, 
-    //             and select just <strong><font color="orange">Europe</font></strong> as a continent. 
-    //             Now slide by a year or two, see the bubbles going backward for several countries. Meaning a drop in GDP per capita. 
-                
-    //             <br>
-    //             Ofcourse! you remember what happened in 2007-2009. Read about <strong><font color="red">'Great Recession in Europe'</font></strong>. 
-    //         `);
-            
-    //         //$("#page-1-btn").prop('disabled', false);
-    //         //$("#play-button").click();
-            
-    //         time = 48;
-    //         $("#country-select").val( "All" ).change();
-    //         $("#continent-select").val( "Europe" ).change();
-    //         update(formattedData[48]);
-    // });
-
     function step(){
         // At the end of our data, loop back
         time = (time < 58) ? time+1 : 0
@@ -571,8 +544,14 @@ function population_graph() {
     // Circle Tip
     var tip = d3.tip().attr('class', 'd3-tip')
         .html(function(d) {
+            var gr;
+            if(d.population_male == 0 || d.population_female == 0 || d.population_male == null || d.population_female == null) {
+                gr = "No Data";
+            } else {
+                gr = d3.format(".2f")((d.population_male / d.population_female) * 100);
+            }
             var text = "<strong><span style='color:yellow; align:center'>" + d3.format(".0f")(d.year) + " - " + d3.format(".2s")(d.population) +  "</span><strong><br>";
-            text += "<strong>Gender Ratio:</strong> <span style='color:orange'>" + d3.format(".2f")((d.population_male / d.population_female) * 100) + "</span><br>";
+            text += "<strong>Gender Ratio:</strong> <span style='color:orange'>" + gr + "</span><br>";
             return text;
         });
     g.call(tip);
@@ -600,6 +579,22 @@ function population_graph() {
     var color_scale = d3.scaleLinear().range(["blue", "red"]).domain([0, 250]);
     var radius_scale = d3.scaleLinear().domain([70, 300]).range([2.5, 15]);
     var color_opacity = d3.scaleLinear().domain([95.0, 105.0]).range([0.2, 1.0]);
+
+    function color_scale_def(population_male, population_female) {
+        if(population_male == 0 || population_female == 0) {
+            return "white";
+        } else {
+            return color_scale((population_male / population_female) * 100);
+        }
+    }
+
+    function radius_scale_def(population_male, population_female) {
+        if(population_male == 0 || population_female == 0) {
+            return 2;
+        } else {
+            return radius_scale((population_male / population_female) * 100);
+        }
+    }
 
     // X-axis
     var xAxisCall = d3.axisBottom()
@@ -690,7 +685,7 @@ function population_graph() {
         circles.enter()
             .append("circle")
             .attr("class", "enter")
-            .attr("fill", function(d) { return color_scale((d.population_male / d.population_female) * 100); })
+            .attr("fill", function(d) { return radius_scale_def(d.population_male, d.population_female); })
             .style("stroke", "black")
             .on("mouseover", tip.show)
             .on("mouseout", tip.hide)
@@ -698,8 +693,8 @@ function population_graph() {
             .transition(t)
                 .attr("cy", function(d){ return y(d.population); })
                 .attr("cx", function(d){ return x(d.year); })
-                .attr("r", function(d){ return 2 + radius_scale((d.population_male / d.population_female) * 100); })        
-                .attr("fill", function(d) { return color_scale((d.population_male / d.population_female) * 100); })
+                .attr("r", function(d){ return 2 + radius_scale_def(d.population_male, d.population_female); })        
+                .attr("fill", function(d) { return color_scale_def(d.population_male, d.population_female); })
                 //.attr("fill-opacity", function(d) { return color_opacity((d.population_male / d.population_female) * 100); })
         // Update y-axis label
         var newText = "Population";
