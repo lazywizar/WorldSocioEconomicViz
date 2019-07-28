@@ -300,6 +300,8 @@ $("#page-4-btn")
             `
                 Several insights comes by exploring the same chart. We see a massive decline in the population, 
                 however the gender ratio did not change much, which indicates the family migrating out of the country.
+                <strong>Now go ahead select different countries, explore the corresponding worm and find new insights!</strong> 
+
             `
         );
         $("#story-left").empty();
