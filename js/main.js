@@ -41,6 +41,8 @@ $("#page-0-btn")
                 The visualization tells an interactive story starting with GDP and Life expectancy growth over years. 
                 <br>
                 User should follow through the buttons on top, or feel free to explore anywhere. Play and deep dive at each slide to see interesting pattens. 
+                <br>
+                There are annotations at multiple points to highlight some interesting trends and the story flow. 
 
                 <br><br></br>
                 <strong>Visual structure</strong><br>
@@ -115,7 +117,9 @@ $("#page-1-btn")
         $("#story-down").append(
                 `Slide the <strong>Year Slider</strong> to observe the transition over time. Hover mouse over the bubbles to see the details,  
                 <br><br>
-                Play with the <strong>continent</strong> and <strong>country</strong> filter, and focus on a single continent or country you are interested in. Be careful, do not choose a country and a wrong continent! Time to test your geography!!
+                Play with the <strong>continent</strong> and <strong>country</strong> filter, 
+                and focus on a single continent or country you are interested in. 
+                <i>Be careful, do not choose a country and a wrong continent! </i>Time to test your geography!!
                 `
         );
 
@@ -165,7 +169,14 @@ $("#page-2-btn")
         $("#story-down").empty();
         $("#story-down").append(
             `
-            Some story here!!
+            Annotations help highlight a particular point of interest on the trend line. 
+            This slide we see the annotation pointer at bubble of country Poland. Mouse over to see the data at that point in time. 
+            Sliders are default moved to the year 2008, and continent variable set to Europe. 
+            This helps to focus user's attention to particular point in time for a selected geography. 
+            <br>
+            <strong>Select any other continent</strong> in the drop down, 
+            or <strong>slide the time to differnt year</strong> to see the annotations disappear. 
+            This way the annotations do not come in the way of open exploration at any slide.
             `
         );
 
@@ -175,9 +186,9 @@ $("#page-2-btn")
                 `
                 Lets pause the slider at <strong><font color="orange">2008</font></strong>, 
                 and select just <strong><font color="orange">Europe</font></strong> as a continent. 
-                Now slide by a year or two, see the bubbles going backward for several countries. Meaning a drop in GDP per capita. 
+                Now <strong><font color="blue">slide by a year, see the bubbles going backward for several countries</strong></font>. Meaning a drop in GDP per capita. 
                 
-                <br>
+                <br><br>
                 Ofcourse! you remember what happened in 2007-2009. Read about <strong><font color="red">'Great Recession in Europe'</font></strong>. 
                 `
         );
@@ -219,14 +230,18 @@ $("#page-3-btn")
         $("#story-down").empty();
         $("#story-down").append(
             `
-            Some story here!!
+                This visualization combines line graph with bubbles, commonly known as a <strong><i> Worm Graph </i></strong>.
+                The color gradients and size of circles indicates the change in the Gender ratio with the line trend indicating the overall population growth.
+                This is particularly interesting to see the how we can depict multiple data on a single chart, and tinkle user's curiosity. 
             `
         );
 
         $("#story-left").empty();
         $("#story-left").append(
                 `
-                This visualization shows the population growth and <strong><font color="green">gender ratio</font></strong> change with it. <br>
+                Diving deeper, we move to a slightly different story, we observe the <strong><font color="green"> trend in Gender Ratio</font></strong> 
+                change with population growth over years. 
+                <br>
                 Taking <strong><font color="red">UAE</font></strong> as an default example, it is alarming to see the steep rise in the gender ratio over the last 50 years.
 
                 <br><br>
@@ -525,7 +540,7 @@ function life_exp_graph(init_time) {
             const annotations_europe = [
                 {
                     note: {
-                        label: "Notice the GDP per capita of $14,001. Slide the year to 2009 to see the chagne.",
+                        label: "Notice the GDP per capita of $14,001. Slide the year to 2009 to see the change.",
                         title: "Poland - 2008"
                     },
                     connector: {
@@ -542,7 +557,7 @@ function life_exp_graph(init_time) {
             const annotations_europe_2 = [
                 {
                     note: {
-                        label:  "Notice the GDP per capita of $14,001. Slide the year to 2009 to see the chagne. (Was here)",
+                        label:  "Notice the GDP per capita of $14,001. Slide the year to 2009 to see the change. (Was here)",
                         title: "Poland - 2008"
                     },
                     connector: {
