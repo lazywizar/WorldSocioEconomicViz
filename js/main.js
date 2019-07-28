@@ -13,6 +13,13 @@ $("#slider-div").hide();
 
 $("#page-0-btn")
     .on("click", function(){
+        $(this).addClass("btn-selected");
+        //$("#page-0-btn").removeClass("btn-selected");
+        $("#page-1-btn").removeClass("btn-selected");
+        $("#page-2-btn").removeClass("btn-selected");
+        $("#page-3-btn").removeClass("btn-selected");
+        $("#page-4-btn").removeClass("btn-selected");
+
         console.log("btn-0 clicked");
         d3.select("#chart-area").select("*").remove();
         //clearInterval(interval);
@@ -71,6 +78,12 @@ $("#page-0-btn")
 
 $("#page-1-btn")
     .on("click", function(){
+        $("#page-0-btn").removeClass("btn-selected");
+        $("#page-1-btn").addClass("btn-selected");
+        $("#page-2-btn").removeClass("btn-selected");
+        $("#page-3-btn").removeClass("btn-selected");
+        $("#page-4-btn").removeClass("btn-selected");
+
         var button = $(this);
         //clearInterval(interval);
         d3.select("#chart-area").select("*").remove();
@@ -121,6 +134,12 @@ $("#page-1-btn")
 
 $("#page-2-btn")
     .on("click", function(){
+        $("#page-0-btn").removeClass("btn-selected");
+        $("#page-1-btn").removeClass("btn-selected");
+        $("#page-2-btn").addClass("btn-selected");
+        $("#page-3-btn").removeClass("btn-selected");
+        $("#page-4-btn").removeClass("btn-selected");
+
         var button = $(this);
         //clearInterval(interval);
         d3.select("#chart-area").select("*").remove();
@@ -161,6 +180,12 @@ $("#page-2-btn")
 
 $("#page-3-btn")
     .on("click", function(){
+        $("#page-0-btn").removeClass("btn-selected");
+        $("#page-1-btn").removeClass("btn-selected");
+        $("#page-2-btn").removeClass("btn-selected");
+        $("#page-3-btn").addClass("btn-selected");
+        $("#page-4-btn").removeClass("btn-selected");
+
         d3.select("#chart-area").select("*").remove();
         clearInterval(interval);
         
@@ -188,6 +213,12 @@ $("#page-3-btn")
 
 $("#page-4-btn")
     .on("click", function(){
+        $("#page-0-btn").removeClass("btn-selected");
+        $("#page-1-btn").removeClass("btn-selected");
+        $("#page-2-btn").removeClass("btn-selected");
+        $("#page-3-btn").removeClass("btn-selected");
+        $("#page-4-btn").addClass("btn-selected");
+
         d3.select("#chart-area").select("*").remove();
         clearInterval(interval);
         
