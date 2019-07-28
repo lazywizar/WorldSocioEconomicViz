@@ -31,13 +31,13 @@ $("#page-1-btn")
                 `
         );
 
-        $(this).prop('disabled', true);
+        //$(this).prop('disabled', true);
         life_exp_graph();  
 });
 
 $("#page-3-btn")
     .on("click", function(){
-        $("#page-1-btn").prop('disabled', false);
+        //$("#page-1-btn").prop('disabled', false);
         $("#graph-1-area").hide();
         $("#chart-area").hide();
         d3.select("#chart-area").select("*").remove();
@@ -197,7 +197,7 @@ function life_exp_graph() {
             Ofcourse! you remember what happened in 2007-2009. Read about <strong><font color="red">'Great Recession in Europe'</font></strong>. 
         `);
         
-        $("#page-1-btn").prop('disabled', false);
+        //$("#page-1-btn").prop('disabled', false);
         //$("#play-button").click();
 
         time = 48;
