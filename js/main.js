@@ -511,8 +511,87 @@ function life_exp_graph(init_time) {
         timeLabel.text(+(time + 1960))
         $("#year")[0].innerHTML = +(time + 1960)
 
-        $("#date-slider").slider("value", +(time + 1960))
+        $("#date-slider").slider("value", +(time + 1960));
+        make_annotation_page(country, continent, time + 1960, true);
     }
+
+        /* Annotations */
+        function make_annotation_page(country, continent, year, flag) {
+            console.log("Country " + country);
+            console.log("Continent " + continent);
+            console.log("Year " + year);
+            console.log("flag " + flag);
+            
+            const annotations_europe = [
+                {
+                    note: {
+                        label: "Notice the GDP per capita of $14,001. Slide the year to 2009 to see the chagne.",
+                        title: "Poland - 2008"
+                    },
+                    connector: {
+                        end: "arrow",        // none, or arrow or dot
+                    },
+                    color: ["blue"],
+                    x: 590,
+                    y: height - 290 + margin.top,
+                    dy: 160,
+                    dx: -50
+                }
+            ]
+
+            const annotations_europe_2 = [
+                {
+                    note: {
+                        label:  "Notice the GDP per capita of $14,001. Slide the year to 2009 to see the chagne. (Was here)",
+                        title: "Poland - 2008"
+                    },
+                    connector: {
+                        end: "arrow",        // none, or arrow or dot
+                    },
+                    color: ["blue"],
+                    x: 590,
+                    y: height - 290 + margin.top,
+                    dy: 160,
+                    dx: -50
+                },
+                {
+                    note: {
+                        label: "GDP per capita drops to $11,527",
+                        title: "Poland - 2009"
+                    },
+                    connector: {
+                        end: "arrow",        // none, or arrow or dot
+                    },
+                    color: ["red"],
+                    x: 575,
+                    y: height - 295 + margin.top,
+                    dy: 100,
+                    dx: -100                
+                }
+            ]
+            
+            var annotations;
+            if(flag && continent == "Europe" && year == 2008 && country == "All") {
+                d3.select("svg").select("#annotations").remove();
+                annotations = annotations_europe;
+            } if(flag && continent == "Europe" && year == 2009 && country == "All") {
+                d3.select("svg").select("#annotations").remove();
+                annotations = annotations_europe_2;
+            } else {
+                d3.select("svg").select("#annotations").remove();
+            }
+    
+            // Add annotation to the chart
+            const makeAnnotations = d3.annotation()
+                .annotations(annotations)
+    
+            if(annotations != null) {
+                d3.select("svg")
+                    .append("g")
+                        .attr("id", "annotations") 
+                    .call(makeAnnotations)
+            }
+        }
 }
 
 /*
