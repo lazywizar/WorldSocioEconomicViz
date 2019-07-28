@@ -108,6 +108,7 @@ $("#page-1-btn")
             `
             Here is the first visualization where we see <strong><font color="blue">Life Expectancy at birth</font>, 
                 <font color="green"> GDP per capita </font> and <font color="red">Population </font> </strong> of a country change over year in a single visualization. 
+                <br>
                 X-axis and Y-axis are self explanatory, size of the bubble is proportional to the population of the country.
             `
         );
@@ -186,7 +187,7 @@ $("#page-2-btn")
                 `
                 Lets pause the slider at <strong><font color="orange">2008</font></strong>, 
                 and select just <strong><font color="orange">Europe</font></strong> as a continent. 
-                Now <strong><font color="blue">slide by a year, see the bubbles going backward for several countries</strong></font>. Meaning a drop in GDP per capita. 
+                Now <strong><font color="blue">slide the year slider ahead by one year</strong></font>, see the bubbles going backward for several countries. Meaning a drop in GDP per capita. 
                 
                 <br><br>
                 Ofcourse! you remember what happened in 2007-2009. Read about <strong><font color="red">'Great Recession in Europe'</font></strong>. 
@@ -224,6 +225,8 @@ $("#page-3-btn")
         $("#story-foot").append(
             `
             <font color="grey"> **Gender ratio is calculated as <font color="green">(Population_Male / Population_Female) * 100</font></font>
+            <br>
+            <font color="grey">You will see empty bubbles for countries where the population distribution data is missing (Try selecting Tuvala) </font>
             `
         );
 
@@ -245,7 +248,7 @@ $("#page-3-btn")
                 Taking <strong><font color="red">UAE</font></strong> as an default example, it is alarming to see the steep rise in the gender ratio over the last 50 years.
 
                 <br><br>
-                Explore how the <i>warm</i> looks for different countries!
+                Explore how the <i>worm</i> looks for different countries!
 
                 `
         );
@@ -283,13 +286,15 @@ $("#page-4-btn")
         $("#story-down").empty();
         $("#story-down").append(
             `
-            Some story here!!
+                Several insights comes by exploring the same chart. We see a massive decline in the population, 
+                however the gender ratio did not change much, which indicates the family migrating out of the country.
             `
         );
         $("#story-left").empty();
         $("#story-left").append(
                 `
-                    The above graph clearly points the start of 
+                    Story continues as we explore different countries and discover several new insights. <br><br>     
+                    The following graph indicates a steep decline in Syrian population. This points the start of 
                     <font color="red"><strong>Syrian civil war</strong></font> around 2011. 
                     More than 4 million citizens migrated out since then. 
                     
@@ -807,14 +812,12 @@ function population_graph() {
                     label: "Notice the Gender ratio was better around these year.",
                     title: "Year 1960 - 1965"
                 },
-                type: d3.annotationCalloutCircle,
-                subject: {
-                    radius: 42,         // circle radius
-                    radiusPadding: 20   // white space around circle befor connector
+                connector: {
+                    end: "arrow",        // none, or arrow or dot
                 },
                 color: ["orange"],
-                x: 150,
-                y: height + margin.top,
+                x: 140,
+                y: height + margin.top - 10,
                 dy: -100,
                 dx: 70
             },
@@ -839,16 +842,14 @@ function population_graph() {
         const annotations_seria = [
             {
                 note: {
-                    label: "Population decline starts. Marks the start of Syrian civil war",
+                    label: "Population decline starts. Marks the start of Syrian civil war.",
                     title: "Year 2010"
                 },
-                /*type: d3.annotationCalloutCircle,
-                subject: {
-                    radius: 45,         // circle radius
-                    radiusPadding: 20   // white space around circle befor connector
-                },*/
+                connector: {
+                    end: "arrow",        // none, or arrow or dot
+                },
                 color: ["orange"],
-                x: 150 + 500,
+                x: 160 + 500,
                 y: height - 350 + margin.top,
                 dy: 50,
                 dx: -160
