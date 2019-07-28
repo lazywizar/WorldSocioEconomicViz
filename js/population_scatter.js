@@ -58,12 +58,6 @@ var y = d3.scaleLinear().range([height, 0]);
 var color_scale = d3.scaleLinear().range(["blue", "red"]).domain([50, 250]);
 var radius_scale = d3.scaleLinear().domain([70, 300]).range([2.5, 15]);
 
-var grs = [50, 100, 200];
-
-// Color legend.
-
-
-
 // X-axis
 var xAxisCall = d3.axisBottom()
     .ticks(10);
@@ -117,7 +111,7 @@ function update() {
     //console.log(dataTimeFiltered);
 
     // Update scales
-    x.domain(d3.extent(dataTimeFiltered, function(d){ return d.year; }));
+    x.domain(d3.extent(dataTimeFiltered, function(d){ return d3.format(".0f")(d.year); }));
     y.domain([d3.min(dataTimeFiltered, function(d){ return d.population; }) / 1.005, 
         d3.max(dataTimeFiltered, function(d){ return d.population; }) * 1.005]);
 
