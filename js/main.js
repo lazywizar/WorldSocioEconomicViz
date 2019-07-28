@@ -210,6 +210,11 @@ $("#page-3-btn")
 
         // Message change
         $("#story-foot").empty();
+        $("#story-foot").append(
+            `
+            <font color="grey"> **Gender ratio is calculated as <font color="green">(Population_Male / Population_Female) * 100</font></font>
+            `
+        );
 
         $("#story-down").empty();
         $("#story-down").append(
@@ -254,6 +259,11 @@ $("#page-4-btn")
 
         // Message change
         $("#story-foot").empty();
+        $("#story-foot").append(
+            `
+            <font color="grey"> **Gender ratio is calculated as <font color="green">(Population_Male / Population_Female) * 100</font></font>
+            `
+        );
 
         $("#story-down").empty();
         $("#story-down").append(
