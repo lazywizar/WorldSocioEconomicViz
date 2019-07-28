@@ -55,8 +55,36 @@ var yLabel = g.append("text")
 // Scales
 var x = d3.scaleLinear().range([0, width]);
 var y = d3.scaleLinear().range([height, 0]);
-var color_scale = d3.scaleLinear().range(["blue", "red"]).domain([50, 250]);
+var color_scale = d3.scaleLinear().range(["blue", "red"]).domain([0, 250]);
 var radius_scale = d3.scaleLinear().domain([70, 300]).range([2.5, 15]);
+var color_opacity = d3.scaleLinear().domain([95.0, 105.0]).range([0.2, 1.0]);
+
+function gender_ratio_color(population_male, population_female){
+    var ratio = (population_male / population_female) * 100;
+    if (ratio >= 99 && ratio <= 101) {
+        return "green";
+    } 
+    if (ratio >= 95 && ratio < 99) {
+        return "Aquamarine";
+    } 
+    if (ratio >= 90 && ratio < 95) {
+        return "Aqua";
+    }
+    if (ratio < 90) {
+        return "GreenYellow";
+    }
+
+    if (ratio > 101 && ratio <= 105) {
+        return "GoldenRod";
+    } 
+    if (ratio > 105 && ratio < 115) {
+        return "DarkOrange";
+    }
+    if (ratio > 115) {
+        return "red";
+    }
+    return "black";
+}
 
 // X-axis
 var xAxisCall = d3.axisBottom()
@@ -203,8 +231,7 @@ function update() {
             .attr("cx", function(d){ return x(d.year); })
             .attr("r", function(d){ return 2 + radius_scale((d.population_male / d.population_female) * 100); })        
             .attr("fill", function(d) { return color_scale((d.population_male / d.population_female) * 100); })
-
-
+            //.attr("fill-opacity", function(d) { return color_opacity((d.population_male / d.population_female) * 100); })
     // Update y-axis label
     var newText = (yValue == "population") ? "Population" :
         ((yValue == "population_male") ?  "Population Male" : "Population Female")
