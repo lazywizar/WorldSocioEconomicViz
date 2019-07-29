@@ -120,7 +120,7 @@ $("#page-1-btn")
                 <br><br>
                 Play with the <strong>continent</strong> and <strong>country</strong> filter, 
                 and focus on a single continent or country you are interested in. 
-                <i>Be careful, do not choose a country and a wrong continent! </i>Time to test your geography!!
+                <font color="red"><i>Be careful, do not choose a country and a wrong continent! </i></font>Time to test your geography!!
                 `
         );
 
@@ -578,8 +578,8 @@ function life_exp_graph(init_time) {
             const annotations_europe_2 = [
                 {
                     note: {
-                        label:  "Notice the GDP per capita of $14,001. Slide the year to 2009 to see the change. (Was here)",
-                        title: "Poland - 2008"
+                        label:  "Poland - 2008 (Was here at $14,001)",
+                        title: ""
                     },
                     connector: {
                         end: "arrow",        // none, or arrow or dot
@@ -691,7 +691,7 @@ function population_graph() {
     // Scales
     var x = d3.scaleLinear().range([0, width]);
     var y = d3.scaleLinear().range([height, 0]);
-    var color_scale = d3.scaleLinear().range(["blue", "red"]).domain([0, 250]);
+    var color_scale = d3.scaleLinear().range(["#0055FF", "#FF3333"]).domain([0, 250]);
     var radius_scale = d3.scaleLinear().domain([70, 300]).range([2.5, 15]);
     var color_opacity = d3.scaleLinear().domain([95.0, 105.0]).range([0.2, 1.0]);
 
@@ -839,7 +839,7 @@ function population_graph() {
             },
             {
                 note: {
-                    label: "Ratio of male to female got worst from worse in recent years. Also notice the decline in population growth.",
+                    label: "Ratio of male to female got bad to worse in recent years. Also notice the decline in population growth.",
                     title: "Year 2010 - 2011"
                 },
                 type: d3.annotationCalloutCircle,
