@@ -472,6 +472,7 @@ function life_exp_graph(init_time) {
 
     $("#country-select")
         .on("change", function(){
+            $("#continent-select").val( "all");
             update(formattedData[time]);
         })
 
