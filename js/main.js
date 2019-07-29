@@ -285,6 +285,8 @@ $("#page-4-btn")
                 <br>
                 <strong>&Tab;Data:</strong> https://databank.worldbank.org/source/world-development-indicators [Transformed using python scripts to JSON format] 
                 <br>
+                <strong>&Tab;Visualization Idea Inspiration:</strong> https://www.gapminder.org/ 
+                <br>
                 <strong>&Tab;D3 Annotations:</strong> https://d3-annotation.susielu.com/
                 <br>
                 <strong>&Tab;D3 Deep learning:</strong> https://www.udemy.com/masteringd3js/ 
