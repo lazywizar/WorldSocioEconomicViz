@@ -6,6 +6,7 @@ var interval;
 var time = 0;
 
 $("#page-0-btn").click();
+$("#page-0-btn").addClass("btn-selected");
 $("#continent-selector-div").hide();
 $("#country-selector-div").hide();
 $("#ledger-pane").hide();
@@ -37,44 +38,62 @@ $("#page-0-btn")
         $("#story-down").empty();
         $("#story-down").append(
                 `
-                Welcome to the journey of exploring insights into socio economic conditions of the world since 1960 to 2017.
-                The visualization tells an interactive story starting with GDP and Life expectancy growth over years. 
-                <br>
-                User should follow through the buttons on top, or feel free to explore anywhere. Play and deep dive at each slide to see interesting pattens. 
-                <br>
-                There are annotations at multiple points to highlight some interesting trends and the story flow. 
-
-                <br><br></br>
-                <strong>Visual structure</strong><br>
-                This visualization follows Interactive Slideshow style of narration. 
-                The user is guided through author driven sequence of Scenes -
-                    but also has the option to skip a section of the flow. 
-                    There are plenty of options to interact with the content.
-                </br></br>
-                <strong>User Interface</strong>
-                </br>
-                When the site is loaded, the user gets a full walk through of the layout 
-                including the buttons used for moving between scene to scene.
-                </br></br>
-                <strong>Scenes</strong>
-                </br>
-                The scenes are represented by buttons on top. 
-                There is a visual order. 
-                The scenes follow a consistent template - the initial walkthorugh describes this visually.
-                </br></br>
-
-                <strong>Annotations</strong></br>
-                Annotations are used in scenes to indicate specific points on the graph. 
-                They are cleared when the user interacts with the dropdown
-                    or when the user switches to a different scene.
-                    They also manifest as tooltips triggered by mouse hover events.
-            </br></br>
-            
-                <strong>Parameters & Triggers</strong></br>
-                Clicking the navigation buttons triggers scene change events - which inturn 
-                changes the parameters. Dropdowns for countries, continent, 
-                slider for time trigger narrowing-down operations.   
-                `
+                Welcome to the journey of exploring insights into socio-economic conditions of the world from 1960 to 2018.
+<br><br>
+<font color=blue><strong>Messaging</strong></font>
+<br>
+The visualization journey explores insights into socio-economic conditions of the world from 1960 to 2018, 
+story flows by identifying key world events based on the charts. The visualization tells an interactive story starting with GDP and Life expectancy growth over the years. Following which users are guided to see the change in gender ratio with the rising population.  Scenes are selected for representative countries where there is a interesting pattern. UAE and The Syrian Arab Republic tell two different stories related to the change in gender ratio and population decline. 
+User should follow through the buttons on top, or feel free to explore anywhere. Play and deep dive at each slide to see interesting patterns. 
+There are annotations at multiple points to highlight some interesting trends and the story flow. 
+<br>
+<br>
+<font color=blue><strong>Narrative Structure</strong></font>
+<br>
+This visualization follows Interactive Slideshow style of narration. Ar each slide user gets an opportunity to explore further with various filters and triggers. 
+<br><br>
+<font color=blue><strong>Visual Structure</strong></font>
+<br>
+The main visual structure followed has a side story, main chart with scatter plot, and a bunch of selectors on the top.
+Going scene by scene, first we start with the overall message in the About scene. 
+<br>
+Following which the next scene <strong>“Observe”</strong> gives a Life Expectancy at birth, GDP per capita and Population of a country change over the year in a single visualization. Data points are represented via scatter plot, with each bubble representing a country, fill colors represent the continent and the size of the bubble represents the Population. There are sliders on the top to see the change over year. User can play with slider to see the transition. There are filters for Country and Continent, which would select a particular data point of interest. There is much for a user to interact and stay engaged.
+<br>
+Next scene <strong>“Think”</strong> takes a deeper dive into the Observe scene by default selecting Europe in the year 2008. There is annotation highlighting GDP per capita of Poland in 2008. User is guided to slide the year slider by a year to see the change. This shows the power of interactive visualization on high impact world events.
+<br>
+In the following scene, <strong>“Dive Deep”</strong> user is shown a different view, of Population growth over year. 
+Instead of using a simple line chart, I chose to use a scatter plot overlayed over a line, making it a worm graph. 
+This interesting visualization depicts population change with Gender Ratio change which is depicted both by size of the bubble and hue. The legend depicts the color coding. 
+Colors are chosen not to have very high contrast, following guidelines in the lesson. 
+This is my favorite scene we are able to show so many useful information in a single chart and in an interesting way.  
+There are two annotations on the page showing the point of interest. User can select any other country to explore the data further.
+<br>
+The last scene is <strong>“Insights”</strong>, which is another use case of an world event insight identifiable via graph pattern. 
+At each scene, the data points have mouseover actions to show the data. 
+<br><br>
+<font color=blue><strong>Scenes </strong></font>
+<br>
+The scenes are represented by buttons on top. There is a visual order. The scenes follow a consistent template - the initial walkthrough describes this visually. 
+There are two main scenes and 1 deep dive to each scene making it a total of 4 scene. 
+The first scene highlights the Life expectancy, GDP per capita and population change over the last 50+ years. User is encouraged to slide the time slider with the help of text on the side of the chart area.
+<br><br>
+<font color=blue><strong>Annotations</strong></font>
+<br>
+Annotations are used in scenes to indicate specific points on the graph. They are cleared when the user interacts with the dropdown or when the user switches to a different scene. They also manifest as tooltips triggered by mouse hover events. 
+Annotations follow a common template of a message, connector line, and selection pointer. To make it interesting I have added a circle area selector to annotate a section of the graph, and a arrowhead pointer for a particular data point. 
+Annotations do change in a single scene based on user-selected parameters. If the user selects a different country or continent the annotations go away, and they come back if the same country is selected. 
+Mouse over at any data point shows the details of the data point.
+<br><br>
+<font color=blue><strong>Parameters</strong></font>
+<br> 
+There are three main parameters of the narrative visualization. Country, Continent, and Year. Along with these the minor ones are number based on which annotations and visualizations are selected. 
+The states of the visualization are the two different scatter plot depictive different data based on the selected country and/or continent and year. The scenes start with an initial state where default year, country or continent is selected to focus user’s attention in the main story flow. 
+<br><br>
+<font color=blue><strong>Triggers</strong></font>
+<br>
+Clicking the navigation buttons triggers scene change events - which in turn changes the default parameters. 
+Further the dropdowns for countries, continent, slider for time trigger parameters and trigger the re-drawing of chart data based on selections. 
+`
         );        
 });
 
@@ -108,7 +127,7 @@ $("#page-1-btn")
             `
             Here is the first visualization where we see <strong><font color="blue">Life Expectancy at birth</font>, 
                 <font color="green"> GDP per capita </font> and <font color="red">Population </font> </strong> of a country change over year in a single visualization. 
-                <br>
+                <br> 
                 X-axis and Y-axis are self explanatory, size of the bubble is proportional to the population of the country.
             `
         );
@@ -139,6 +158,7 @@ $("#page-1-btn")
 
         //$(this).prop('disabled', true);
         life_exp_graph(0);  
+        $("#page-1-btn").addClass("btn-selected");
 });
 
 $("#page-2-btn")
@@ -200,6 +220,7 @@ $("#page-2-btn")
         time = 48;    
         //$(this).prop('disabled', true);
         life_exp_graph(48);  
+        $("#page-2-btn").addClass("btn-selected");
 });
 
 $("#page-3-btn")
@@ -255,6 +276,7 @@ $("#page-3-btn")
 
         $("#country-select").val( "United Arab Emirates");
         population_graph();
+        $("#page-3-btn").addClass("btn-selected");
 });
 
 $("#page-4-btn")
@@ -279,21 +301,6 @@ $("#page-4-btn")
         $("#story-foot").empty();
         $("#story-foot").append(
             `
-            <font color="darkgrey">
-                <strong>References and Credits:</strong><br>
-                <strong>&Tab;Knowledge:</strong> https://www.coursera.org/learn/cs-498-dv/ 
-                <br>
-                <strong>&Tab;Data:</strong> https://databank.worldbank.org/source/world-development-indicators [Transformed using python scripts to JSON format] 
-                <br>
-                <strong>&Tab;Visualization Idea Inspiration:</strong> https://www.gapminder.org/ 
-                <br>
-                <strong>&Tab;D3 Annotations:</strong> https://d3-annotation.susielu.com/
-                <br>
-                <strong>&Tab;D3 Deep learning:</strong> https://www.udemy.com/masteringd3js/ 
-                <br>
-                <strong>&Tab;D3 Tip:</strong> https://github.com/caged/d3-tip 
-                <br>
-            </font>
             `
         );
 
@@ -321,6 +328,7 @@ $("#page-4-btn")
 
         $("#country-select").val( "Syrian Arab Republic");
         population_graph();
+        $("#page-4-btn").addClass("btn-selected");
 });
 
 
@@ -692,7 +700,11 @@ function population_graph() {
     // Scales
     var x = d3.scaleLinear().range([0, width]);
     var y = d3.scaleLinear().range([height, 0]);
-    var color_scale = d3.scaleLinear().range(["#0055FF", "#FF3333"]).domain([0, 250]);
+    var color_scale = d3.scaleLinear()
+        .domain([0, 100, 250])
+        .range(["green", "yellow", "red"]);
+
+    //var color_scale = d3.scaleLinear().range(["#0055FF", "#FF3333"]).domain([0, 250]);
     var radius_scale = d3.scaleLinear().domain([70, 300]).range([2.5, 15]);
     var color_opacity = d3.scaleLinear().domain([95.0, 105.0]).range([0.2, 1.0]);
 
@@ -832,7 +844,7 @@ function population_graph() {
                 connector: {
                     end: "arrow",        // none, or arrow or dot
                 },
-                color: ["orange"],
+                color: ["blue"],
                 x: 140,
                 y: height + margin.top - 10,
                 dy: -100,
@@ -865,7 +877,7 @@ function population_graph() {
                 connector: {
                     end: "arrow",        // none, or arrow or dot
                 },
-                color: ["orange"],
+                color: ["blue"],
                 x: 160 + 500,
                 y: height - 350 + margin.top,
                 dy: 50,
