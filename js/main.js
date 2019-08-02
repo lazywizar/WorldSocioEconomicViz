@@ -38,7 +38,9 @@ $("#page-0-btn")
         $("#story-down").empty();
         $("#story-down").append(
                 `
-                Welcome to the journey of exploring insights into socio-economic conditions of the world from 1960 to 2018.
+                Welcome to the journey of exploring insights into socio-economic conditions of the world from 1960 to 2018, 
+                along the way we identify a few key events and patterns in the specific country's history. 
+
 <br><br>
 <font color=blue><strong>Messaging</strong></font>
 <br>
